@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public interface Shop {
+public interface IShop {
     List<Product> getProducts();
 
     void addProduct(Product product);
-    //void createProducts();
+
 }

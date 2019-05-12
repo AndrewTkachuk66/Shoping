@@ -1,31 +1,35 @@
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-        Shop foodShop = new FoodShop();
-        Shop technicsShop = new TechnicsShop();
+        IShop foodIShop = new FoodShop();
+        IShop technicsIShop = new TechnicsShop();
 
-        technicsShop.addProduct(new Product("Sony",150));
-        technicsShop.addProduct(new Product("Samsung",120));
-        technicsShop.addProduct(new Product("Asus",100));
+        technicsIShop.addProduct(new Product("Sony",150));
+        technicsIShop.addProduct(new Product("Samsung",120));
+        technicsIShop.addProduct(new Product("Asus",100));
 
-        foodShop.addProduct(new Product("Bread",20));
-        foodShop.addProduct(new Product("Meat",150));
-        foodShop.addProduct(new Product("Milk",40));
+        foodIShop.addProduct(new Product("Bread",20));
+        foodIShop.addProduct(new Product("Meat",150));
+        foodIShop.addProduct(new Product("Milk",40));
 
-        Wife wife = new Wife();
-        wife.addProduct(new Product("Bread",12));
-        wife.addProduct(new Product("Asus", 120));
-        wife.addProduct(new Product("Panasonic", 120));
+        IWife wife1 = new Wife1();
+        wife1.addProduct(new Product("Bread",12));
+        wife1.addProduct(new Product("Asus", 120));
+        wife1.addProduct(new Product("Panasonic", 120));
 
+        IWife wife2 = new Wife2();
+        wife2.addProduct(new Product("Milk", 40));
+        wife2.addProduct(new Product("Sony", 150));
 
-        Husband husband = new Husband(foodShop);
-        husband.addShops(technicsShop);
-        husband.createListOfNeedProducts(wife);
+        Husband husband = new Husband(foodIShop);
+        husband.addShop(technicsIShop);
+        husband.createListOfNeedProducts(wife1);
         husband.createBoughtProductsList();
 
         System.out.println("All products: " + husband.getAllProducts());
-        System.out.println("Need to bay products" + husband.getNeedToBuyProducts());
+        System.out.println("Need to bay products form first wife: " + husband.getNeedToBuyProducts());
+        husband.createListOfNeedProducts(wife2);
+        husband.createBoughtProductsList();
+        System.out.println("Need to bay products from second wife: " + husband.getNeedToBuyProducts());
         System.out.println("Bought products: " + husband.getBoughtProducts());
         System.out.println("Total price: " + husband.getPriceOfBoughtProducts());
 

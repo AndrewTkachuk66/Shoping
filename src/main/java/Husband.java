@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Husband {
-   private List<Product> allProducts;
-   private List<Product> needToBuyProducts;
-   private List<Product> boughtProducts;
+   private List<Product> allProducts = new ArrayList<Product>();
+   private List<Product> needToBuyProducts = new ArrayList<Product>();
+   private List<Product> boughtProducts = new ArrayList<Product>() ;
 
     public List<Product> getAllProducts() {
         return allProducts;
@@ -18,24 +18,18 @@ public class Husband {
         return boughtProducts;
     }
 
-    public void createListOfNeedProducts(Wife wife) {
-        needToBuyProducts = wife.getNeedToBayProducts();
-   }
-
-   public Husband(){
-       allProducts = new ArrayList<Product>();
-       boughtProducts = new ArrayList<Product>();
-       needToBuyProducts = new ArrayList<Product>();
-   }
-
-    public Husband(Shop shop){
-        allProducts = shop.getProducts();
+    public Husband(IShop IShop){
+        allProducts = IShop.getProducts();
         boughtProducts = new ArrayList<Product>();
         needToBuyProducts = new ArrayList<Product>();
     }
 
-    public void addShops(Shop shop){
-        allProducts.addAll(shop.getProducts());
+    public void createListOfNeedProducts(IWife iWife) {
+        needToBuyProducts = iWife.getNeedToBayProducts();
+   }
+
+    public void addShop(IShop iShop){
+        allProducts.addAll(iShop.getProducts());
 
     }
 
@@ -55,7 +49,7 @@ public class Husband {
         int price = 0;
         for (Product product: boughtProducts) {
             price = product.getPriceOfProduct();
-            result = result + price;
+            result += price;
         }
         return result;
     }
