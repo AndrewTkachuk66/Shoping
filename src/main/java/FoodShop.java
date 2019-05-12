@@ -12,9 +12,13 @@ public class FoodShop implements Shop {
         this.food = new ArrayList<Product>();
     }
 
-    public void createProducts(){
+    public void addProduct(Product product){
+        food.add(product);
+    }
+
+    /*public void createProducts(){
         food.add(new Product("Bread",20));
         food.add(new Product("Meat",150));
         food.add(new Product("Milk",40));
-    }
+    }*/
 }

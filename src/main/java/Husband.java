@@ -6,46 +6,55 @@ public class Husband {
    private List<Product> needToBuyProducts;
    private List<Product> boughtProducts;
 
-   public List<Product> createListOfNeedProducts() {
-       Wife wife = new Wife(needToBuyProducts);
-       needToBuyProducts = wife.createListOfNeedProducts();
-       return needToBuyProducts;
-   }
-
-    public Husband(){
-        allProducts = new ArrayList<Product>();
-        boughtProducts = new ArrayList<Product>();
-    }
-
-    public List<Product> createAllProductsList(List<Product> products){
-        Husband husband = new Husband();
-        husband.createListOfNeedProducts();
-        for (int i = 0; i < products.size(); i++) {
-            allProducts.add(products.get(i));
-        }
+    public List<Product> getAllProducts() {
         return allProducts;
     }
 
-    public List<Product> doShopping(){
+    public List<Product> getNeedToBuyProducts() {
+        return needToBuyProducts;
+    }
+
+    public List<Product> getBoughtProducts() {
+        return boughtProducts;
+    }
+
+    public void createListOfNeedProducts(Wife wife) {
+        needToBuyProducts = wife.getNeedToBayProducts();
+   }
+
+   public Husband(){
+       allProducts = new ArrayList<Product>();
+       boughtProducts = new ArrayList<Product>();
+       needToBuyProducts = new ArrayList<Product>();
+   }
+
+    public Husband(Shop shop){
+        allProducts = shop.getProducts();
+        boughtProducts = new ArrayList<Product>();
+        needToBuyProducts = new ArrayList<Product>();
+    }
+
+    public void addShops(Shop shop){
+        allProducts.addAll(shop.getProducts());
+
+    }
+
+    public void createBoughtProductsList(){
         for (Product product: allProducts) {
             for (Product product1: needToBuyProducts) {
-                String name1 =  product.getNameOfProduct();
-                String name2 = product1.getNameOfProduct();
-                if (name1.equals(name2))
+                if (product.getNameOfProduct().equals(product1.getNameOfProduct()))
                 {
                     boughtProducts.add(product);
                 }
             }
-
         }
-        return boughtProducts;
     }
 
-    public int countPriceOfBoughtProducts() {
+    public int getPriceOfBoughtProducts() {
         int result = 0;
         int price = 0;
-        for (int i = 0; i < boughtProducts.size(); i++) {
-            price = boughtProducts.get(i).getPriceOfProduct();
+        for (Product product: boughtProducts) {
+            price = product.getPriceOfProduct();
             result = result + price;
         }
         return result;

@@ -12,9 +12,13 @@ public class TechnicsShop implements Shop {
         this.technics = new ArrayList<Product>();
     }
 
-    public void createProducts(){
+    public void addProduct(Product product){
+        technics.add(product);
+    }
+
+   /* public void createProducts(){
         technics.add(new Product("Sony",150));
         technics.add(new Product("Sumsung",120));
         technics.add(new Product("Asus",100));
-    }
+    }*/
 }
